@@ -6,7 +6,7 @@
       <form @submit.prevent="handleLogin">
         <div class="input-group">
           <label for="username">사용자 이름</label>
-          <input
+          <InputEl
               id="username"
               v-model="username"
               type="text"
@@ -26,31 +26,48 @@
         </div>
         <button type="submit" class="login-btn">로그인</button>
       </form>
-      <p class="forgot-password">
-        <a href="#">비밀번호를 잊으셨나요?</a>
-      </p>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import axios from "axios";
+import {useRouter} from "vue-router";
+import InputEl from "@/components/common/InputEl.vue";
+
 
 // 반응형 변수
 const username = ref('');
 const password = ref('');
-
+const router = useRouter();
+const stype = ref('text');
 // 로그인 처리 함수
-const handleLogin = () => {
+const handleLogin = async () => {
   // 여기서 로그인 로직 추가 (예: API 호출)
   console.log('로그인 시도:', {
     username: username.value,
     password: password.value,
   });
   // 입력 필드 초기화 (선택 사항)
-  username.value = '';
-  password.value = '';
+  // username.value = '';
+  // password.value = '';
+  try {
+    const response = await axios.post("http://localhost:8888/users/login", {
+      name: username.value,
+      password: password.value,
+    });
+
+    console.log("### 로그인 정보: ", response.data);
+    console.log("### router: ", router);
+    await router.push("/index");
+    console.log("### 왜 푸시가 안되지?")
+  } catch(error) {
+    console.log("### 로그인 오류: ", error.message);
+  }
+
 };
+
 </script>
 
 <style scoped>
@@ -91,7 +108,7 @@ label {
 }
 
 input {
-  width: 100%;
+  width: 93%;
   padding: 0.75rem;
   border: 1px solid #ddd;
   border-radius: 8px;
