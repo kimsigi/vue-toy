@@ -1,37 +1,27 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import App from '@/App.vue';
-import Index from "@/components/Index.vue";
-import NotFound from "@/components/common/NotFound.vue";
+import Main from "@/views/Main.vue";
+import Login from "@/views/Login.vue";
 
 const routes = [
-    { path: '/', name: 'Login', component: App },
-    { path: '/index', name: 'index', component: Index },
-
-    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
-    /*
-            { path: '/posts', name: 'post-list', component: PostList },
-            { path: '/posts/:id', name: 'post-detail', component: PostDetail },
-            { path: '/posts/create', name: 'post-create', component: PostCreate },
-            { path: '/posts/edit/:id', name: 'post-edit', component: PostEdit },
-
-            { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
-
-            { path: '/nested',
-                name: 'Nested',
-                component: Nested,
-                children: [
-                    { path: '', name: 'NestedHome', component: NestedHome },
-                    { path: 'one', name: 'NestedOne', component: NestedOne },
-                    { path: 'two', name: 'NestedTwo', component: NestedTwo },
-                ]
-            }
-            */
+    {path: '/', component: Login},
+    {path: '/main', name: 'Main', component: Main, meta: {requiresAuth: true}},
+    // {path: '/users', name: 'UserList', component: UserList, meta: {requiresAuth: true}},
 ];
 
 const router = createRouter({
-    history: createWebHistory("/"),
+    history: createWebHistory('/'),
     routes,
+});
+
+// 네비게이션 가드
+router.beforeEach((to, from, next) => {
+    const isAuth = sessionStorage.getItem('accessToken');
+    if ( to.meta.requiresAuth && !isAuth ) {
+        next('/');
+    } else {
+        next();
+    }
 });
 
 export default router;
