@@ -3,9 +3,9 @@
     <div class="card p-4 shadow-lg w-25">
       <h3 class="text-center">로그인</h3>
       <form @submit.prevent="handleLogin">
-        <BaseInput v-model="username" label="이름" placeholder="이름을 입력하세요." required/>
-        <BaseInput v-model="password" label="비밀번호" type="password" placeholder="비밀번호를 입력하세요." required/>
-        <BaseButton type="submit" class="w-100 mt-3">로그인</BaseButton>
+        <BaseInput v-model="username" label="이름" placeholder="이름을 입력하세요."/>
+        <BaseInput v-model="password" label="비밀번호" type="password" placeholder="비밀번호를 입력하세요."/>
+        <BaseButton type="submit" class="btn btn-primary w-100 mt-3">로그인</BaseButton>
       </form>
     </div>
   </div>

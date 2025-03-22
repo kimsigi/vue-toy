@@ -1,12 +1,13 @@
 <template>
-  <button class="btn btn-primary w-100" :type="type">
+  <button class="btn btn-primary" :class="class" :type="type">
     <slot />
   </button>
 </template>
 
 <script setup>
   defineProps({
-    type: {type: String, default: 'button'}
+    type: {type: String, default: 'button'},
+    class: {type: String}
   });
 </script>
 
