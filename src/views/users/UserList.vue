@@ -63,12 +63,20 @@
     </div>
   </div>
 
-  <!-- ✅ 페이지네이션 -->
-  <BasePages
-      :currentPage="currentPage"
-      :totalPages="totalPages"
-      @change="fnSearch"
-  />
+  <!-- ✅ 페이지네이션 + 등록 버튼 라인 -->
+  <div class="d-flex align-items-center mt-3">
+
+    <div class="mx-auto">
+      <BasePages
+          :currentPage="currentPage"
+          :totalPages="totalPages"
+          @change="fnSearch"
+      />
+    </div>
+
+    <!-- 우측: 등록 버튼 -->
+    <BaseButton @click="goToCreate">등록</BaseButton>
+  </div>
 
 </template>
 
@@ -79,7 +87,9 @@ import BaseButton from "@/components/buttons/BaseButton.vue";
 import BaseSelect2 from "@/components/selects/BaseSelect2.vue";
 import axios from "axios";
 import {useUserStore} from "@/store/user.js";
+import {useRouter} from "vue-router";
 
+const router = useRouter();
 const userStore = useUserStore();
 
 const searchCondition = ref('');
@@ -120,6 +130,8 @@ const fnSearch = async (nextPage = 1) => {
   totalPages.value = response.data.totalPage;
   totalCount.value = response.data.totalCount;
 }
+
+const goToCreate = () => router.push('/userCreate')
 
 onMounted(() => fnSearch(1));
 

@@ -19,6 +19,6 @@ export const useUserStore = defineStore('user', {
         }
     },
     persist: {
-        storage: sessionStorage, // ✅ `sessionStorage`로 저장
+        storage: localStorage, // ✅ `localStorage`로 저장
     }
 });

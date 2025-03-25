@@ -1,12 +1,10 @@
 <template>
     <UserBaseForm
-        :id="userId"
         v-model:name="userName"
         v-model:password="userPassword"
         @submit="handleSubmit"
-        @goList="goList"
         @cancel="cancelEdit"
-        cuType="E"
+        cuType="C"
         ref="baseForm"
     />
 
@@ -23,18 +21,12 @@
 
   const userStore = useUserStore();
 
-  const userId = ref(null);
   const userName = ref(null);
   const userPassword = ref(null);
   const baseForm = ref(null);
 
-
-  const goList = () => {
-    router.push('/user');
-  }
-
   const cancelEdit = () => {
-    router.push('/userDetail');
+    router.push('/user');
   }
 
   const handleSubmit = async () => {
@@ -44,11 +36,11 @@
       password: formData.password.value,
     }
     try {
-      const response = await axios.put(`http://localhost:8888/users/modify/${userStore.id}`, payload);
+      const response = await axios.post(`http://localhost:8888/users/create`, payload);
       userStore.setUser(response.data);
       userStore.setId(response.data._id);
 
-      if ( response.status === 200 ) {
+      if ( response.status === 201 ) {
         router.push('/userDetail')
       }
       console.log(response);
@@ -56,23 +48,6 @@
       console.log(error.message);
     }
   }
-
-  const fnGetUser = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8888/users/detail/${userStore.id}`);
-      userId.value = response.data._id;
-      userName.value = response.data.name;
-      userPassword.value = response.data.password;
-    } catch(error) {
-      console.log(error.message);
-    }
-
-  }
-
-  onMounted(() => {
-    fnGetUser();
-  });
-
 </script>
 
 <style lang="scss" scoped>
