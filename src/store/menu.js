@@ -9,10 +9,20 @@ export const useMenuStore = defineStore('menu', () => {
 
     const subMenus = ref([
         { id: 'submenu1', mainMenuId: 'menu1', name: '사용자 관리', topath: '/user', icon: 'bi bi-people' },
-        // { id: 'submenu2', mainMenuId: 'menu1', name: '권한 관리', topath: '/a', icon: 'bi bi-shield-lock' },
-        // { id: 'submenu3', mainMenuId: 'menu1', name: '부서 관리', topath: '/b', icon: 'bi bi-diagram-3' },
-        { id: 'submenu4', mainMenuId: 'menu2', name: '샘플', topath: '/c', icon: 'bi bi-briefcase' },
-        // { id: 'submenu5', mainMenuId: 'menu2', name: '일정 관리', topath: '/d', icon: 'bi bi-calendar3' },
+        { id: 'submenu2', mainMenuId: 'menu2', name: 'computed', topath: '/showcase1', icon: 'bi bi-briefcase' },
+        { id: 'submenu3', mainMenuId: 'menu2', name: 'watch', topath: '/showcase2', icon: 'bi bi-briefcase' },
+        { id: 'submenu4', mainMenuId: 'menu2', name: 'watchEffect', topath: '/showcase3', icon: 'bi bi-briefcase' },
+        { id: 'submenu5', mainMenuId: 'menu2', name: '양방향바인딩(v-model)', topath: '/showcase4', icon: 'bi bi-briefcase' },
+        { id: 'submenu6', mainMenuId: 'menu2', name: 'props', topath: '/showcase5', icon: 'bi bi-briefcase' },
+        { id: 'submenu7', mainMenuId: 'menu2', name: 'emits', topath: '/showcase6', icon: 'bi bi-briefcase' },
+        { id: 'submenu8', mainMenuId: 'menu2', name: '텔레포트', topath: '/showcase7', icon: 'bi bi-briefcase' },
+        { id: 'submenu9', mainMenuId: 'menu2', name: '커스텀디렉티브', topath: '/showcase8', icon: 'bi bi-briefcase' },
+        { id: 'submenu10', mainMenuId: 'menu2', name: '플러그인', topath: '/showcase9', icon: 'bi bi-briefcase' },
+        { id: 'submenu11', mainMenuId: 'menu2', name: '컴포저블', topath: '/showcase10', icon: 'bi bi-briefcase' },
+        { id: 'submenu12', mainMenuId: 'menu2', name: '네비게이션가드', topath: '/showcase11', icon: 'bi bi-briefcase' },
+        { id: 'submenu13', mainMenuId: 'menu2', name: '트랜지션(+그룹)', topath: '/showcase12', icon: 'bi bi-briefcase' },
+        { id: 'submenu14', mainMenuId: 'menu2', name: 'Vuex', topath: '/showcase13', icon: 'bi bi-briefcase' },
+        { id: 'submenu15', mainMenuId: 'menu2', name: 'Pinia', topath: '/showcase14', icon: 'bi bi-briefcase' },
     ]);
 
     const activeMainMenu = ref('');
@@ -30,6 +40,7 @@ export const useMenuStore = defineStore('menu', () => {
     const setActiveSubMenu = (menuId) => {
         activeSubMenu.value = menuId;
     }
+
     return {
         mainMenus,
         subMenus,
